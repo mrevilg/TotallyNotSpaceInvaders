@@ -13,3 +13,10 @@
 6. If any alien reaches the bottom or touches the player's ship, a life is lost.
 
 7. If the player loses three ships, the game ends.
+
+| Controls | Description |
+| --- | --- |
+| Left Arrow | Move your ship to the left. |
+| Right Arrow | Move your ship to the right. |
+| Spacebar | Shoot lazers (x3 per clip). |
+| 'Q'| Quit Game. |
