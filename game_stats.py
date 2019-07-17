@@ -11,7 +11,7 @@ class GameStats():
 
         # High core should never be reset.
         self.high_score = 0
-
+        
     def reset_stats(self):
         """Initialize statistics that happen during the game."""
         self.ship_left = self.ai_settings.ship_limit
