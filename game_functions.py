@@ -66,6 +66,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
         sb.prep_score()
         sb.prep_high_score()
         sb.prep_level()
+        sb.prep_ships()
 
         # Empty the list of aliens and bullets.
         aliens.empty()
@@ -182,6 +183,9 @@ def ship_hit(ai_settings, screen, stats, ship, aliens, bullets):
         # Decrement ships_left.
         stats.ship_left -= 1
 
+        # Update scoreboard.
+        sb.prep_ships()
+
         # Empty the list of aliens and bullets.
         aliens.empty()
         bullets.empty()
@@ -197,16 +201,16 @@ def ship_hit(ai_settings, screen, stats, ship, aliens, bullets):
         stats.game_active = False
         pygame.mouse.set_visible(True)
 
-def check_aliens_bottom(ai_settings, screen, stats, ship, aliens, bullets):
+def check_aliens_bottom(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Check if alien reaches bottom of screen."""
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
             # Treat as collision
-            ship_hit(ai_settings, screen, stats, ship, aliens, bullets)
+            ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets)
             break
 
-def update_aliens(ai_settings, screen, stats, ship, aliens, bullets):
+def update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets):
 
     """
     Check if the fleet is at an edge, 
@@ -217,10 +221,10 @@ def update_aliens(ai_settings, screen, stats, ship, aliens, bullets):
 
     # Look for alien/ship collisions.
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_settings, screen, stats, ship, aliens, bullets)
+        ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
     # Look for alien/bottom collisions.      
-    check_aliens_bottom(ai_settings, screen, stats, ship, aliens, bullets)
+    check_aliens_bottom(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 def check_high_score(stats, sb):
         """Check to see if ther is a new high score."""
